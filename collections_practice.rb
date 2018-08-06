@@ -52,22 +52,15 @@ end
 
 # this may need work on again
 def organize_schools(array)
-  new_hash = Hash.new
-  iter_array = []
-  #fill the iter_array with location
-  array.each do |e|
-    iter_array << e[1][:location]
-  end
-  #make location to be only unique locations
-  iter_array = iter_array.uniq
-  new_array = []
-  for i in 0..iter_array.length do
-    array.each do |e|
-      if e[1][:location] == iter_array[i]
-        new_hash[e[1][:location]] = new_array << e[0]
-      end
+  new_hash = {}
+  array.each do |name, location_value|
+    new_location = location_value[:location]
+    if new_hash[location]
+      new_hash[new_location] << name
+    else
+      new_hash[new_location] = []
+      new_hash[new_location] << name
     end
-    new_array = []
   end
   new_hash
 end
